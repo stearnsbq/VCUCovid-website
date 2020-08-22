@@ -1,0 +1,56 @@
+.charts {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.col {
+  flex: 1;
+  overflow: hidden;
+
+  .graph {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 24px;
+  }
+}
+
+.covid_info_grid {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+
+  .card {
+    margin-right: 5px;
+    margin-left: 5px;
+    border-bottom: 5px solid #FFBE0C;
+  }
+}
+
+
+@media only screen and (max-width: 1000px){
+  .charts{
+    flex-direction: column;
+  }
+
+}
+
+@media only screen and (max-width: 895px) {
+  .covid_info_grid {
+    flex-direction: column;
+    .card {
+      margin-bottom: 15px;
+    }
+  }
+
+  .charts{
+    flex-direction: column;
+  }
+
+
+}
+
+
+
+
