@@ -6,4 +6,6 @@ A website that displays active student and employee cases of COVID-19, how many 
 
 Data source: https://together.vcu.edu/dashboard/
  
+
+![Image](https://raw.githubusercontent.com/stearnsbq/VCUCovid-website/master/info/images/image1.png)
   
