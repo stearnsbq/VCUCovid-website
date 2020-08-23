@@ -1,14 +1,13 @@
 <app-loading *ngIf="api.loading"></app-loading>
+
 <div class="covid_info_grid">
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">Active Cases</h5>
       <ul>
-        <li *ngIf="studentCaseData">Student Cases: <ng2-odometer
-            [number]="studentCases"></ng2-odometer>
+        <li *ngIf="studentCaseData">Student Cases: <ng2-odometer [number]="studentCases"></ng2-odometer>
         </li>
-        <li *ngIf="employeeCaseData">Employee Cases: <ng2-odometer
-            [number]="employeeCases"></ng2-odometer>
+        <li *ngIf="employeeCaseData">Employee Cases: <ng2-odometer [number]="employeeCases"></ng2-odometer>
         </li>
       </ul>
     </div>
@@ -17,11 +16,9 @@
     <div class="card-body">
       <h5 class="card-title">Students in Isolation or Quarantine</h5>
       <ul>
-        <li *ngIf="isolationData">Students in Isolation: <ng2-odometer
-            [number]="isolations"></ng2-odometer>
+        <li *ngIf="isolationData">Students in Isolation: <ng2-odometer [number]="isolations"></ng2-odometer>
         </li>
-        <li *ngIf="quarantineData">Students in Quarantine: <ng2-odometer
-            [number]="quarantines"></ng2-odometer>
+        <li *ngIf="quarantineData">Students in Quarantine: <ng2-odometer [number]="quarantines"></ng2-odometer>
         </li>
       </ul>
     </div>
@@ -30,13 +27,20 @@
     <div class="card-body">
       <h5 class="card-title">COVID-19 Test Results</h5>
       <ul>
-        <li *ngIf="negativeTestData">Negative Test Results: <ng2-odometer
-            [number]="negativeTestResults"></ng2-odometer>
+        <li *ngIf="negativeTestData">Negative Test Results: <ng2-odometer [number]="negativeTestResults"></ng2-odometer>
         </li>
-        <li *ngIf="positiveTestData">Positive Test Results: <ng2-odometer
-            [number]="positiveTestResults"></ng2-odometer>
+        <li *ngIf="positiveTestData">Positive Test Results: <ng2-odometer [number]="positiveTestResults"></ng2-odometer>
         </li>
       </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">About</h5>
+      <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
+      <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
+      <p class="card-text"></p>
+      <footer *ngIf="studentCaseData" class="blockquote-footer">Last Updated {{studentCaseData[studentCaseData.length - 1].date.split('T')[0]}}</footer>
     </div>
   </div>
 </div>
@@ -63,6 +67,25 @@
     </div>
     <div class="graph">
       <app-graph *ngIf="positiveTestData" [title]="'Positive Test Results'" [data]="positiveTestData"></app-graph>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showModal" class="modal" id="aboutModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">About This Website</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Modal body text goes here.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" (click)="showModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
     </div>
   </div>
 </div>

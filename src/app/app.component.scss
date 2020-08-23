@@ -4,6 +4,10 @@
   flex-wrap: wrap;
 }
 
+#last-updated{
+  font-size: 12px;
+}
+
 .col {
   flex: 1;
   overflow: hidden;
@@ -25,6 +29,9 @@
     margin-right: 5px;
     margin-left: 5px;
     border-bottom: 5px solid #FFBE0C;
+    li ng2-odometer {
+      font-weight: bold;
+    }
   }
 }
 

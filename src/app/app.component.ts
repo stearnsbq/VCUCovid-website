@@ -1,5 +1,6 @@
 import { ApiService } from './api.service';
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
+import { Meta } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -15,22 +16,31 @@ export class AppComponent implements AfterViewInit {
   public quarantineData;
   public positiveTestData;
   public negativeTestData;
-  public studentCases;
-  public employeeCases;
-  public isolations;
-  public quarantines;
-  public negativeTestResults;
-  public positiveTestResults;
+  public studentCases: number;
+  public employeeCases: number;
+  public isolations: number;
+  public quarantines: number;
+  public negativeTestResults: number;
+  public positiveTestResults: number;
+  public showModal: boolean;
 
-  constructor(private api: ApiService, private elementRef: ElementRef) {
+  constructor(public api: ApiService, private elementRef: ElementRef, public meta: Meta) {
+    this.showModal = false;
 
     this.api.getAll().subscribe((all) => {
-      this.studentCases = all.students[0].value;
-      this.employeeCases = all.employees[0].value;
-      this.isolations = all.isolations[0].value;
-      this.quarantines = all.quarantines[0].value;
-      this.negativeTestResults = all.negatives[0].value;
-      this.positiveTestResults = all.positives[0].value;
+      this.studentCases = all.students[all.students.length - 1].value;
+      this.employeeCases = all.employees[all.employees.length - 1].value;
+      this.isolations = all.isolations[all.isolations.length - 1].value;
+      this.quarantines = all.quarantines[all.quarantines.length - 1].value;
+      this.negativeTestResults = all.negatives[all.negatives.length - 1].value;
+      this.positiveTestResults = all.positives[all.positives.length - 1].value;
+
+      this.meta.addTag({name: 'Student Cases', content: this.studentCases + ''});
+      this.meta.addTag({name: 'Employee Cases', content: this.employeeCases + ''});
+      this.meta.addTag({name: 'Student Isolations', content: this.isolations + ''});
+      this.meta.addTag({name: 'Student Quarantines', content: this.quarantines + ''});
+      this.meta.addTag({name: 'Negative Test Results', content: this.negativeTestResults + ''});
+      this.meta.addTag({name: 'Positive Test Results', content: this.positiveTestResults + ''});
 
       this.studentCaseData = all.students;
       this.employeeCaseData = all.employees;
@@ -44,6 +54,6 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style[
       'background-image'
-    ] = `url(./assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
+    ] = `url(vcucovid/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
   }
 }
