@@ -54,6 +54,6 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style[
       'background-image'
-    ] = `url(vcucovid/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
+    ] = `url(assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
   }
 }

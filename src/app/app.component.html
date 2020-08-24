@@ -45,29 +45,18 @@
   </div>
 </div>
 <div class="charts">
-  <div class="col">
+  <div class="top">
     <div class="graph">
-      <app-graph *ngIf="studentCaseData" [title]="'Student Cases'" [data]="studentCaseData"></app-graph>
-    </div>
-    <div class="graph">
-      <app-graph *ngIf="employeeCaseData" [title]="'Employee Cases'" [data]="employeeCaseData"></app-graph>
+      <app-graph *ngIf="studentCaseData && employeeCaseData" [title]="'COVID-19 Cases'" [dataNames]="['Student Cases', 'Employee Cases']" [data]="[studentCaseData, employeeCaseData]"></app-graph>
     </div>
   </div>
-  <div class="col">
-    <div class="graph">
-      <app-graph *ngIf="isolationData" [title]="'Students In Isolation'" [data]="isolationData"></app-graph>
-    </div>
-    <div class="graph">
-      <app-graph *ngIf="quarantineData" [title]="'Students In Quarantine'" [data]="quarantineData"></app-graph>
-    </div>
-  </div>
-  <div class="col">
-    <div class="graph">
-      <app-graph *ngIf="negativeTestData" [title]="'Negative Test Results'" [data]="negativeTestData"></app-graph>
-    </div>
-    <div class="graph">
-      <app-graph *ngIf="positiveTestData" [title]="'Positive Test Results'" [data]="positiveTestData"></app-graph>
-    </div>
+  <div class="bottom">
+      <div class="graph">
+        <app-graph *ngIf="isolationData && quarantineData" [title]="'Students In Isolation or Quarantine'" [dataNames]="['Quarantined Students', 'Isolated Students']" [data]="[quarantineData, isolationData]"></app-graph>
+      </div>
+      <div class="graph">
+        <app-graph *ngIf="negativeTestData && positiveTestData" [title]="'Test Results'" [dataNames]="['Negative Results', 'Positive Results']" [data]="[negativeTestData, positiveTestData]"></app-graph>
+      </div>
   </div>
 </div>
 
