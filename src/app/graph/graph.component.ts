@@ -53,14 +53,19 @@ export class GraphComponent implements OnInit {
     },
     series: [
       {
-        name: 'cases',
-        data: this.data.map((value) => value.value),
-      },
+        data: this.data.map((value) => {
+          return {x: value.date, y: value.value}
+        }),
+      }
     ],
     xaxis: {
-      categories: this.data.map((value) =>
-        moment(value.date).format('MM-DD-YYYY')
-      ),
+      type: 'datetime',
+      labels: {
+        offsetX: -15,
+        style: {
+          fontSize: '10px'
+        }
+      }
     },
     stroke: {
       curve: 'smooth',
