@@ -16,13 +16,18 @@ export class AppComponent implements AfterViewInit {
   public quarantineData;
   public positiveTestData;
   public negativeTestData;
+  public prevalencePositiveData;
+  public prevalenceNegativeData;
   public studentCases: number;
   public employeeCases: number;
   public isolations: number;
   public quarantines: number;
   public negativeTestResults: number;
   public positiveTestResults: number;
+  public prevalencePositives: number;
+  public prevalenceNegatives: number;
   public showModal: boolean;
+
 
   constructor(public api: ApiService, private elementRef: ElementRef, public meta: Meta) {
     this.showModal = false;
@@ -34,6 +39,8 @@ export class AppComponent implements AfterViewInit {
       this.quarantines = all.quarantines[0].value;
       this.negativeTestResults = all.negatives[0].value;
       this.positiveTestResults = all.positives[0].value;
+      this.prevalenceNegatives = all.prevalenceNegative[0].value;
+      this.prevalencePositives = all.prevalencePositive[0].value;
 
       this.meta.addTag({name: 'Student Cases', content: this.studentCases + ''});
       this.meta.addTag({name: 'Employee Cases', content: this.employeeCases + ''});
@@ -41,6 +48,9 @@ export class AppComponent implements AfterViewInit {
       this.meta.addTag({name: 'Student Quarantines', content: this.quarantines + ''});
       this.meta.addTag({name: 'Negative Test Results', content: this.negativeTestResults + ''});
       this.meta.addTag({name: 'Positive Test Results', content: this.positiveTestResults + ''});
+      this.meta.addTag({name: 'Positive Prevalence Test Results', content: this.prevalencePositives + ''});
+      this.meta.addTag({name: 'Negative Prevalence Test Results', content: this.prevalenceNegatives + ''});
+
 
       this.studentCaseData = all.students;
       this.employeeCaseData = all.employees;
@@ -48,12 +58,14 @@ export class AppComponent implements AfterViewInit {
       this.quarantineData = all.quarantines;
       this.positiveTestData = all.positives;
       this.negativeTestData = all.negatives;
+      this.prevalenceNegativeData = all.prevalenceNegative;
+      this.prevalencePositiveData = all.prevalencePositive;
     });
   }
 
   ngAfterViewInit() {
     this.elementRef.nativeElement.ownerDocument.body.style[
       'background-image'
-    ] = `url(assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
+    ] = `url(vcucovid/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
   }
 }

@@ -25,6 +25,17 @@
   </div>
   <div class="card">
     <div class="card-body">
+      <h5 class="card-title">Prevalence Test Results</h5>
+      <ul>
+        <li *ngIf="prevalencePositiveData">Positive Prevalence Tests: <ng2-odometer [number]="prevalencePositives"></ng2-odometer>
+        </li>
+        <li *ngIf="prevalenceNegativeData">Negative Prevalence Tests: <ng2-odometer [number]="prevalenceNegatives"></ng2-odometer>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
       <h5 class="card-title">COVID-19 Test Results</h5>
       <ul>
         <li *ngIf="negativeTestData">Negative Test Results: <ng2-odometer [number]="negativeTestResults"></ng2-odometer>
@@ -40,7 +51,7 @@
       <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
       <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
       <p class="card-text"></p>
-      <footer *ngIf="studentCaseData" class="blockquote-footer">Last Updated {{studentCaseData[studentCaseData.length - 1].date.split('T')[0]}}</footer>
+      <footer *ngIf="studentCaseData" class="blockquote-footer">Last Updated {{studentCaseData[0].date.split('T')[0]}}</footer>
     </div>
   </div>
 </div>
@@ -48,6 +59,9 @@
   <div class="top">
     <div class="graph">
       <app-graph *ngIf="studentCaseData && employeeCaseData" [title]="'COVID-19 Cases'" [dataNames]="['Student Cases', 'Employee Cases']" [data]="[studentCaseData, employeeCaseData]"></app-graph>
+    </div>
+    <div class="graph">
+      <app-graph *ngIf="prevalenceNegativeData && prevalencePositiveData" [title]="'Prevalence Test Results'" [dataNames]="['Negative Results', 'Positive Results']" [data]="[prevalenceNegativeData, prevalencePositiveData]"></app-graph>
     </div>
   </div>
   <div class="bottom">

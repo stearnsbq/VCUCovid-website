@@ -5,4 +5,6 @@ export interface Data {
   quarantines: any[];
   students: any[];
   employees: any[];
+  prevalenceNegative: any[];
+  prevalencePositive: any[];
 }
