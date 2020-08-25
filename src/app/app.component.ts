@@ -26,11 +26,18 @@ export class AppComponent implements AfterViewInit {
   public positiveTestResults: number;
   public prevalencePositives: number;
   public prevalenceNegatives: number;
+  public totalStudents: number;
+  public totalEmployees: number;
   public showModal: boolean;
+
+
 
 
   constructor(public api: ApiService, private elementRef: ElementRef, public meta: Meta) {
     this.showModal = false;
+
+
+
 
     this.api.getAll().subscribe((all) => {
       this.studentCases = all.students[0].value;
@@ -41,6 +48,10 @@ export class AppComponent implements AfterViewInit {
       this.positiveTestResults = all.positives[0].value;
       this.prevalenceNegatives = all.prevalenceNegative[0].value;
       this.prevalencePositives = all.prevalencePositive[0].value;
+      this.totalStudents = all.totalStudents[0].value;
+      this.totalEmployees = all.totalEmployees[0].value;
+
+
 
       this.meta.addTag({name: 'Student Cases', content: this.studentCases + ''});
       this.meta.addTag({name: 'Employee Cases', content: this.employeeCases + ''});
@@ -50,6 +61,8 @@ export class AppComponent implements AfterViewInit {
       this.meta.addTag({name: 'Positive Test Results', content: this.positiveTestResults + ''});
       this.meta.addTag({name: 'Positive Prevalence Test Results', content: this.prevalencePositives + ''});
       this.meta.addTag({name: 'Negative Prevalence Test Results', content: this.prevalenceNegatives + ''});
+
+
 
 
       this.studentCaseData = all.students;

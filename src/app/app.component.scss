@@ -26,12 +26,13 @@
 	margin-top: 10px;
 	display: flex;
 	justify-content: center;
-	flex-direction: row;
+  flex-direction: row;
+  align-items: flex-start;
 
 	.card {
 		margin-right: 5px;
 		margin-left: 5px;
-		border-bottom: 5px solid #ffbe0c;
+    border-bottom: 5px solid #ffbe0c;
 		li ng2-odometer {
 			font-weight: bold;
 		}
@@ -46,12 +47,19 @@
 		.graph {
 			margin: 5px;
 		}
-	}
+  }
+
+  .covid_info_grid{
+    align-items: stretch;
+
+  }
+
 
 	.top,
 	.bottom {
 		flex-direction: column;
-		flex: 1;
+    flex: 1;
+
 	}
 }
 

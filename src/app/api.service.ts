@@ -3,20 +3,14 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ApiService {
   public loading = false;
 
-  constructor(private http: HttpClient) {
-
-  }
+  constructor(private http: HttpClient) {}
 
   public getAll() {
-    return this.http.get<Data>('https://quinn50.dev/vcucovid/api/v1');
+    return this.http.get<Data>('http://192.168.1.202:8084/api/v1');
   }
-
-
-
-
 }

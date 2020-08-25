@@ -7,4 +7,6 @@ export interface Data {
   employees: any[];
   prevalenceNegative: any[];
   prevalencePositive: any[];
+  totalStudents: any[];
+  totalEmployees: any[];
 }

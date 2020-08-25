@@ -6,8 +6,14 @@
       <h5 class="card-title">Active Cases</h5>
       <ul>
         <li *ngIf="studentCaseData">Student Cases: <ng2-odometer [number]="studentCases"></ng2-odometer>
+          <ul>
+            <li>Total Students: <ng2-odometer [number]="totalStudents"></ng2-odometer></li>
+          </ul>
         </li>
         <li *ngIf="employeeCaseData">Employee Cases: <ng2-odometer [number]="employeeCases"></ng2-odometer>
+          <ul>
+            <li>Total Employees: <ng2-odometer [number]="totalEmployees"></ng2-odometer></li>
+          </ul>
         </li>
       </ul>
     </div>
@@ -71,24 +77,5 @@
       <div class="graph">
         <app-graph *ngIf="negativeTestData && positiveTestData" [title]="'Test Results'" [dataNames]="['Negative Results', 'Positive Results']" [data]="[negativeTestData, positiveTestData]"></app-graph>
       </div>
-  </div>
-</div>
-
-<div *ngIf="showModal" class="modal" id="aboutModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">About This Website</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p>Modal body text goes here.</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" (click)="showModal" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
   </div>
 </div>

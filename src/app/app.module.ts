@@ -8,6 +8,7 @@ import { GraphComponent } from './graph/graph.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingComponent } from './loading/loading.component';
 import { LoadingInterceptor } from './LoadingInterceptor';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 
@@ -21,7 +22,8 @@ import { LoadingInterceptor } from './LoadingInterceptor';
     BrowserModule,
     HttpClientModule,
     AppRoutingModule,
-    Ng2OdometerModule
+    Ng2OdometerModule,
+    GoogleChartsModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true}],
   bootstrap: [AppComponent]
