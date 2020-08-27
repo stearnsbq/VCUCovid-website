@@ -52,19 +52,6 @@ export class AppComponent implements AfterViewInit {
       this.totalEmployees = all.totalEmployees[0].value;
 
 
-
-      this.meta.addTag({name: 'Student Cases', content: this.studentCases + ''});
-      this.meta.addTag({name: 'Employee Cases', content: this.employeeCases + ''});
-      this.meta.addTag({name: 'Student Isolations', content: this.isolations + ''});
-      this.meta.addTag({name: 'Student Quarantines', content: this.quarantines + ''});
-      this.meta.addTag({name: 'Negative Test Results', content: this.negativeTestResults + ''});
-      this.meta.addTag({name: 'Positive Test Results', content: this.positiveTestResults + ''});
-      this.meta.addTag({name: 'Positive Prevalence Test Results', content: this.prevalencePositives + ''});
-      this.meta.addTag({name: 'Negative Prevalence Test Results', content: this.prevalenceNegatives + ''});
-
-
-
-
       this.studentCaseData = all.students;
       this.employeeCaseData = all.employees;
       this.isolationData = all.isolations;

@@ -4,81 +4,70 @@ import {
   Input,
   AfterContentInit,
   ViewChild,
-} from "@angular/core";
-import * as ApexCharts from "apexcharts";
-import * as moment from "moment";
+  AfterViewInit,
+} from '@angular/core';
+import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
 
 @Component({
-  selector: "app-graph",
-  templateUrl: "./graph.component.html",
-  styleUrls: ["./graph.component.scss"],
+  selector: 'app-graph',
+  templateUrl: './graph.component.html',
+  styleUrls: ['./graph.component.scss'],
 })
 export class GraphComponent implements OnInit {
   @Input() data: any[][];
   @Input() dataNames: string[];
   @Input() title: string;
   @Input() chartType: string;
-  @ViewChild("chart", { static: true })
+  @Input() colors: string[];
+  @ViewChild('chart', { static: true })
   chart_element;
 
   public chart: any;
+  public labels: any;
 
   constructor() {
-    this.title = "Graph";
-    this.chartType = "area";
+    this.title = 'Graph';
+    this.chartType = 'area';
   }
 
-  ngOnInit() {
-    const series = this.data.map((value, index) => {
+  ngOnInit(): void {
+    const graphData: ChartDataSets[] = this.data.map((value, index) => {
       return {
-        name: this.dataNames[index],
+        label: this.dataNames[index],
         data: value.map((val) => {
-          return { x: val.date, y: val.value };
+          return val.value;
         }),
+        backgroundColor: this.colors[index],
+        pointBackgroundColor:
+        this.colors[index === this.colors.length - 1 ? index - 1 : index + 1],
+        fill: index === 0 ? 'origin' : -index + '',
       };
     });
 
-    const options = {
-      chart: {
-        fontFamily:
-          '"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
-        type: "area",
-        width: "100%",
-        foreColor: "#211F1F",
-        toolbar: {
-          show: false,
-        },
-        //  background: '#FAFAFA'
+    this.labels = this.data[0].map((value) => {
+      return value.date;
+    });
+
+    this.chart = new Chart(this.chart_element.nativeElement, {
+      type: 'line',
+      data: {
+        labels: this.labels,
+        datasets: graphData,
       },
-      colors: ["#FFBE0C", "#211F1F", "#58575A"],
-      title: {
-        text: this.title,
-        floating: false,
-      },
-      markers: {
-        size: 3,
-      },
-      series,
-      xaxis: {
-        type: "datetime",
-        labels: {
-          offsetX: -15,
-          style: {
-            fontSize: "10px",
-          },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              stacked: true,
+            }
+          ],
+          xAxes: [
+            {
+              stacked: true,
+            },
+          ],
         },
       },
-      stroke: {
-        curve: "smooth",
-        width: 2,
-      },
-      legend: {
-        position: "top",
-      },
-    };
-
-    this.chart = new ApexCharts(this.chart_element.nativeElement, options);
-
-    this.chart.render();
+    });
   }
 }
