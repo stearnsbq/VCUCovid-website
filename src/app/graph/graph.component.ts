@@ -7,6 +7,8 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 
 @Component({
   selector: 'app-graph',
@@ -38,36 +40,36 @@ export class GraphComponent implements OnInit {
           return val.value;
         }),
         backgroundColor: this.colors[index],
-        pointBackgroundColor:
-        this.colors[index === this.colors.length - 1 ? index - 1 : index + 1],
-        fill: index === 0 ? 'origin' : -index + '',
+
+        pointBackgroundColor: this.colors[index === this.colors.length - 1 ? index - 1 : index + 1],
+        fill: this.chartType === 'area' ? index === 0 ? 1 : 'start' : false
       };
     });
+
 
     this.labels = this.data[0].map((value) => {
       return value.date;
     });
 
     this.chart = new Chart(this.chart_element.nativeElement, {
-      type: 'line',
+      type: this.chartType === 'area' ? 'line' : this.chartType,
+      plugins: [ChartDataLabels],
       data: {
         labels: this.labels,
         datasets: graphData,
       },
       options: {
-        scales: {
-          yAxes: [
-            {
-              stacked: true,
-            }
-          ],
-          xAxes: [
-            {
-              stacked: true,
-            },
-          ],
+        title: {
+          display: true,
+          text: this.title
         },
-      },
+        plugins: {
+          datalabels: {
+            align: 'top',
+            offset: 1
+          }
+        }
+      }
     });
   }
 }

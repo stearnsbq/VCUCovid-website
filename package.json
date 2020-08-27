@@ -23,6 +23,7 @@
     "@types/moment": "^2.13.0",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.9.3",
+    "chartjs-plugin-datalabels": "^0.7.0",
     "jquery": "^3.5.1",
     "moment": "^2.27.0",
     "ng-bootstrap": "^1.6.3",
