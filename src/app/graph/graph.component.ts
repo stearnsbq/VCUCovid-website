@@ -34,9 +34,14 @@ export class GraphComponent implements OnInit {
   }
 
   private getMax(a) {
-    return Math.max(
+    return Math.floor(Math.max(
       ...a.map((e) => (Array.isArray(e) ? this.getMax(e) : e.value))
-    );
+    ));
+  }
+
+  private getDigits(a) {
+    a = Math.abs(a);
+    return Math.log(a) * Math.LOG10E + 1 | 0;
   }
 
   ngOnInit(): void {
@@ -59,6 +64,10 @@ export class GraphComponent implements OnInit {
       return value.date;
     });
 
+
+    const max = Math.pow(10, this.getDigits(this.getMax(this.data)));
+
+
     this.chart = new Chart(this.chart_element.nativeElement, {
       type: this.chartType === 'area' ? 'line' : this.chartType,
       plugins: [ChartDataLabels],
@@ -75,7 +84,7 @@ export class GraphComponent implements OnInit {
                 this.scale === 'logarithmic'
                   ? {
                       min: 0,
-                      max: 10000,
+                      max,
                       callback(value, index, values) {
                         if (
                           value === 10 ||
