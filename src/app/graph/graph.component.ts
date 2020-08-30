@@ -9,7 +9,6 @@ import {
 import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
-
 @Component({
   selector: 'app-graph',
   templateUrl: './graph.component.html',
@@ -21,6 +20,7 @@ export class GraphComponent implements OnInit {
   @Input() title: string;
   @Input() chartType: string;
   @Input() colors: string[];
+  @Input() scale: string;
   @ViewChild('chart', { static: true })
   chart_element;
 
@@ -30,6 +30,13 @@ export class GraphComponent implements OnInit {
   constructor() {
     this.title = 'Graph';
     this.chartType = 'area';
+    this.scale = 'linear';
+  }
+
+  private getMax(a) {
+    return Math.max(
+      ...a.map((e) => (Array.isArray(e) ? this.getMax(e) : e.value))
+    );
   }
 
   ngOnInit(): void {
@@ -41,11 +48,12 @@ export class GraphComponent implements OnInit {
         }),
         backgroundColor: this.colors[index],
 
-        pointBackgroundColor: this.colors[index === this.colors.length - 1 ? index - 1 : index + 1],
-        fill: this.chartType === 'area' ? index === 0 ? 1 : 'start' : false
+        pointBackgroundColor: this.colors[
+          index === this.colors.length - 1 ? index - 1 : index + 1
+        ],
+        fill: this.chartType === 'area' ? (index === 0 ? 1 : 'start') : false,
       };
     });
-
 
     this.labels = this.data[0].map((value) => {
       return value.date;
@@ -59,19 +67,43 @@ export class GraphComponent implements OnInit {
         datasets: graphData,
       },
       options: {
+        scales: {
+          yAxes: [
+            {
+              type: this.scale,
+              ticks:
+                this.scale === 'logarithmic'
+                  ? {
+                      min: 0,
+                      max: 10000,
+                      callback(value, index, values) {
+                        if (
+                          value === 10 ||
+                          value === 100 ||
+                          value === 1000 ||
+                          value === 10000
+                        ) {
+                          return value;
+                        }
+                      },
+                    }
+                  : {},
+            },
+          ],
+        },
         maintainAspectRatio: false,
         aspectRatio: 1,
         title: {
           display: true,
-          text: this.title
+          text: this.title,
         },
         plugins: {
           datalabels: {
             align: 'top',
-            offset: 1
-          }
-        }
-      }
+            offset: 1,
+          },
+        },
+      },
     });
   }
 }

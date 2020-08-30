@@ -70,7 +70,7 @@
       <app-graph *ngIf="studentCaseData && employeeCaseData" [chartType]="'area'" [title]="'COVID-19 Cases'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Student Cases', 'Employee Cases']" [data]="[studentCaseData, employeeCaseData]"></app-graph>
     </div>
     <div class="graph">
-      <app-graph *ngIf="prevalenceNegativeData && prevalencePositiveData" [chartType]="'area'" [title]="'Prevalence Test Results'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Negative Results', 'Positive Results']" [data]="[prevalenceNegativeData, prevalencePositiveData]"></app-graph>
+      <app-graph *ngIf="prevalenceNegativeData && prevalencePositiveData" [scale]="'logarithmic'"  [chartType]="'area'" [title]="'Prevalence Test Results'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Negative Results', 'Positive Results']" [data]="[prevalenceNegativeData, prevalencePositiveData]"></app-graph>
     </div>
   </div>
   <div class="bottom">
@@ -78,7 +78,7 @@
         <app-graph *ngIf="isolationData && quarantineData" [chartType]="'area'" [title]="'Students In Isolation or Quarantine'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Quarantined Students', 'Isolated Students']" [data]="[quarantineData, isolationData]"></app-graph>
       </div>
       <div class="graph">
-        <app-graph *ngIf="negativeTestData && positiveTestData" [chartType]="'area'" [title]="'Test Results'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Negative Results', 'Positive Results']" [data]="[negativeTestData, positiveTestData]"></app-graph>
+        <app-graph *ngIf="negativeTestData && positiveTestData" [scale]="'logarithmic'" [chartType]="'area'" [title]="'Test Results'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Negative Results', 'Positive Results']" [data]="[negativeTestData, positiveTestData]"></app-graph>
       </div>
   </div>
 </div>
