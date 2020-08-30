@@ -48,10 +48,19 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">About</h5>
-      <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
-      <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
-      <p class="card-text"></p>
-      <footer *ngIf="studentCaseData" class="blockquote-footer">Last Updated {{studentCaseData[0].date.split('T')[0]}}</footer>
+      <ul>
+        <li>
+          <a class="card-link" style="cursor: pointer;" (click)="showModal = true" data-toggle="modal" data-target="#defintionModal">Definitions</a>
+        </li>
+        <li>
+          <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
+        </li>
+        <li>
+          <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
+        </li>
+      </ul>
+
+      <footer *ngIf="studentCaseData" class="blockquote-footer">Last Updated {{studentCaseData[studentCaseData.length - 1].date.split('T')[0]}}</footer>
     </div>
   </div>
 </div>
@@ -71,5 +80,33 @@
       <div class="graph">
         <app-graph *ngIf="negativeTestData && positiveTestData" [chartType]="'area'" [title]="'Test Results'" [colors]="['rgba(255, 190, 12, 0.6)', 'rgba(33, 31, 31, 0.6)']" [dataNames]="['Negative Results', 'Positive Results']" [data]="[negativeTestData, positiveTestData]"></app-graph>
       </div>
+  </div>
+</div>
+
+
+
+<div *ngIf="showModal" class="modal fade" id="defintionModal" tabindex="-1" role="dialog" aria-labelledby="defintionModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Definitions</h5>
+        <button type="button" (click)="showModal = false" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <h5>Active cases</h5>
+        <p>Active cases are the number of people who have tested positive and are in isolation either on-campus or off-campus. Any reduction in cases indicates individuals being cleared to return to work or class.</p>
+        <h5>Isolation and quarantine</h5>
+        <p>Isolation separates those who test positive from people who are not sick. Quarantine separates and restricts the movement of those who may have been exposed to see if they become sick. Isolation and quarantine information presented below is specific to on-campus residential students. Off-campus students and employees may also be isolated or quarantined. Any reduction in cases indicates individuals being cleared to return to work or class.</p>
+        <h5>Prevalence testing</h5>
+        <p>VCU tests a percentage of asymptomatic community members Monday through Thursday to gauge the proportion of people with COVID-19 in the VCU community.</p>
+        <h5>Entry testing</h5>
+        <p>Residential students were mailed test kits to conduct COVID-19 testing prior to move-in. VCU restricts move-in for students who test positive. </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="showModal = false" data-dismiss="modal">Close</button>
+      </div>
+    </div>
   </div>
 </div>

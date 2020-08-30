@@ -59,6 +59,8 @@ export class GraphComponent implements OnInit {
         datasets: graphData,
       },
       options: {
+        maintainAspectRatio: false,
+        aspectRatio: 1,
         title: {
           display: true,
           text: this.title
