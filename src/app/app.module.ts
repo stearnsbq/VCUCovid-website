@@ -10,7 +10,6 @@ import { LoadingInterceptor } from './LoadingInterceptor';
 import { ChartsModule } from 'ng2-charts';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,

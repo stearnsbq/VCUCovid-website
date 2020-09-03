@@ -1,12 +1,17 @@
 import { ApiService } from './api.service';
 import { Component, AfterViewInit, ElementRef } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
+import { Router, NavigationEnd } from '@angular/router';
+declare let ga: any;
+
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
+
 export class AppComponent implements AfterViewInit {
   title = 'vcu-covid-app';
   public data;
@@ -33,11 +38,15 @@ export class AppComponent implements AfterViewInit {
 
 
 
-  constructor(public api: ApiService, private elementRef: ElementRef, public meta: Meta) {
+  constructor(public api: ApiService, private elementRef: ElementRef, public meta: Meta, public router: Router) {
     this.showModal = false;
 
-
-
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        ga('set', 'page', event.urlAfterRedirects);
+        ga('send', 'pageview');
+      }
+    });
 
     this.api.getAll().subscribe((all) => {
       this.studentCases = all.students[all.students.length - 1].value;

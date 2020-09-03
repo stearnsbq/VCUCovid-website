@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import 'chartjs-plugin-zoom';
 
 @Component({
   selector: 'app-graph',
@@ -87,6 +88,8 @@ export class GraphComponent implements OnInit {
                       max,
                       callback(value, index, values) {
                         if (
+                          value === 0 ||
+                          value === 1 ||
                           value === 10 ||
                           value === 100 ||
                           value === 1000 ||
@@ -111,6 +114,24 @@ export class GraphComponent implements OnInit {
             align: 'top',
             offset: 1,
           },
+          zoom: {
+            pan: {
+              enabled: true,
+              mode: 'x',
+              rangeMin: {
+                x: 0,
+                y: 0
+              }
+            },
+            zoom: {
+              enabled: true,
+              mode: 'x',
+                rangeMin: {
+                x: 0,
+                y: 0
+              }
+            }
+          }
         },
       },
     });
