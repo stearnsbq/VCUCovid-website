@@ -10,7 +10,6 @@ import {
 import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-zoom';
-import { time } from 'console';
 
 @Component({
   selector: 'app-graph',
