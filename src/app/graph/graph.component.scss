@@ -1,4 +1,4 @@
-div{
+.graph {
   background-color: #FAFAFA;
   border-radius: 8px;
   border: 3px solid #211F1F;
@@ -6,4 +6,29 @@ div{
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.11);
+}
+
+
+
+canvas{
+  width: 100% !important;
+  height: 400px !important;
+}
+
+.filter-options{
+  display: flex;
+  justify-content: center;
+  background-color: rgba($color: #211F1F, $alpha: 0.6);
+
+  span{
+    cursor: pointer;
+    flex: 0.1;
+    color: white;
+    transition: 0.5s;
+  }
+}
+
+.filter-active{
+  color: #FFBE0C !important;
+  transition: 0.5s;
 }

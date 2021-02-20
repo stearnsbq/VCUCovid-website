@@ -1,3 +1,4 @@
+import { ApiService } from './../api.service';
 import {
   Component,
   OnInit,
@@ -9,6 +10,7 @@ import {
 import { ChartDataSets, ChartOptions, Chart, plugins } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import 'chartjs-plugin-zoom';
+import { time } from 'console';
 
 @Component({
   selector: 'app-graph',
@@ -16,7 +18,7 @@ import 'chartjs-plugin-zoom';
   styleUrls: ['./graph.component.scss'],
 })
 export class GraphComponent implements OnInit {
-  @Input() data: any[][];
+  @Input() whatChart: string;
   @Input() dataNames: string[];
   @Input() title: string;
   @Input() chartType: string;
@@ -27,11 +29,14 @@ export class GraphComponent implements OnInit {
 
   public chart: any;
   public labels: any;
+  public timeScale: string;
+  public data: any[][];
 
-  constructor() {
+  constructor(private api : ApiService) {
     this.title = 'Graph';
     this.chartType = 'area';
     this.scale = 'linear';
+    this.timeScale = '1W';
   }
 
   private getMax(a) {
@@ -40,12 +45,21 @@ export class GraphComponent implements OnInit {
     ));
   }
 
+
+  public async filter(timeScale){
+    this.timeScale = timeScale
+    this.data = (await this.api.get(this.whatChart, this.timeScale).toPromise()).data
+  }
+
   private getDigits(a) {
     a = Math.abs(a);
     return Math.log(a) * Math.LOG10E + 1 | 0;
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+
+    this.data = (await this.api.get(this.whatChart, this.timeScale).toPromise()).data
+
     const graphData: ChartDataSets[] = this.data.map((value, index) => {
       return {
         label: this.dataNames[index],
@@ -61,13 +75,15 @@ export class GraphComponent implements OnInit {
       };
     });
 
-    this.labels = this.data[0].map((value) => {
+    this.labels = this.data[0].map((value, idx) => {
+      if(value.date === "Invalid date"){
+        return this.data[0][idx - 1].date;
+      }
       return value.date;
     });
 
 
     const max = Math.pow(10, this.getDigits(this.getMax(this.data)));
-
 
     this.chart = new Chart(this.chart_element.nativeElement, {
       type: this.chartType === 'area' ? 'line' : this.chartType,
@@ -77,6 +93,7 @@ export class GraphComponent implements OnInit {
         datasets: graphData,
       },
       options: {
+        responsive: true,
         scales: {
           yAxes: [
             {

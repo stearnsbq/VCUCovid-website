@@ -1,5 +1,5 @@
 import { ApiService } from './api.service';
-import { Component, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, isDevMode, OnInit } from '@angular/core';
 import { Meta } from '@angular/platform-browser';
 import { Router, NavigationEnd } from '@angular/router';
 declare let ga: any;
@@ -12,27 +12,10 @@ declare let ga: any;
 })
 
 
-export class AppComponent implements AfterViewInit {
+export class AppComponent implements AfterViewInit, OnInit {
   title = 'vcu-covid-app';
-  public data;
-  public studentCaseData;
-  public employeeCaseData;
-  public isolationData;
-  public quarantineData;
-  public positiveTestData;
-  public negativeTestData;
-  public prevalencePositiveData;
-  public prevalenceNegativeData;
-  public studentCases: number;
-  public employeeCases: number;
-  public isolations: number;
-  public quarantines: number;
-  public negativeTestResults: number;
-  public positiveTestResults: number;
-  public prevalencePositives: number;
-  public prevalenceNegatives: number;
-  public totalStudents: number;
-  public totalEmployees: number;
+  public totals: any
+  public lastUpdated: string;
   public showModal: boolean;
 
 
@@ -47,34 +30,23 @@ export class AppComponent implements AfterViewInit {
         ga('send', 'pageview');
       }
     });
+  }
 
-    this.api.getAll().subscribe((all) => {
-      this.studentCases = all.students[all.students.length - 1].value;
-      this.employeeCases = all.employees[all.employees.length - 1].value;
-      this.isolations = all.isolations[all.isolations.length - 1].value;
-      this.quarantines = all.quarantines[all.quarantines.length - 1].value;
-      this.negativeTestResults = all.negatives[all.negatives.length - 1].value;
-      this.positiveTestResults = all.positives[all.positives.length - 1].value;
-      this.prevalenceNegatives = all.prevalenceNegative[all.prevalenceNegative.length - 1].value;
-      this.prevalencePositives = all.prevalencePositive[all.prevalencePositive.length - 1].value;
-      this.totalStudents = all.totalStudents[all.totalStudents.length - 1].value;
-      this.totalEmployees = all.totalEmployees[all.totalEmployees.length - 1].value;
+  ngOnInit() {
+    this.api.get("totals").subscribe(({data}) => {
+      this.totals = data;
+    })
 
+    this.api.get("lastUpdated").subscribe(({data}) => {
+      this.lastUpdated = data;
+    })
 
-      this.studentCaseData = all.students;
-      this.employeeCaseData = all.employees;
-      this.isolationData = all.isolations;
-      this.quarantineData = all.quarantines;
-      this.positiveTestData = all.positives;
-      this.negativeTestData = all.negatives;
-      this.prevalenceNegativeData = all.prevalenceNegative;
-      this.prevalencePositiveData = all.prevalencePositive;
-    });
   }
 
   ngAfterViewInit() {
+
     this.elementRef.nativeElement.ownerDocument.body.style[
       'background-image'
-    ] = `url(vcucovid/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
+    ] = `url(${!isDevMode() ? 'vcucovid' : ''}/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
   }
 }

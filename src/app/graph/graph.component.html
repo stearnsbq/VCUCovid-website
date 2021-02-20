@@ -1,4 +1,11 @@
-<div>
-  <canvas #chart width="400" height="350" ></canvas>
+<div class="graph">
+  <canvas #chart></canvas>
+  <div class="filter-options">
+    <span [ngClass]="{'filter-active': timeScale === '1W'}" (click)="filter('1W')">1W</span>
+    <span [ngClass]="{'filter-active': timeScale === '1M'}" (click)="filter('1M')">1M</span>
+    <span [ngClass]="{'filter-active': timeScale === '3M'}" (click)="filter('3M')">3M</span>
+    <span [ngClass]="{'filter-active': timeScale === '1Y'}" (click)="filter('1Y')">1Y</span>
+    <span [ngClass]="{'filter-active': timeScale === 'ALL'}" (click)="filter('ALL')">All</span>
+  </div>
 </div>
 

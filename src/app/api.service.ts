@@ -1,6 +1,8 @@
-import { Data } from './model/data';
+import { environment } from './../environments/environment';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import {Response} from './model/response'
+
 
 @Injectable({
   providedIn: 'root',
@@ -8,9 +10,25 @@ import { HttpClient } from '@angular/common/http';
 export class ApiService {
   public loading = false;
 
-  constructor(private http: HttpClient) {}
+  public apiURL: string;
 
-  public getAll() {
-    return this.http.get<Data>('https://quinn50.dev/vcucovid/api/v1');
+  constructor(private http: HttpClient) {
+    this.apiURL = environment.apiUrl;
   }
+
+  public get(what: string, filter?: string){
+    let params = new HttpParams();
+
+
+    if(filter){
+      params = params.set("filter", filter);
+    }
+
+
+    return this.http.get<Response>(this.apiURL + `/${what}`, {params})
+  }
+
+
+
+
 }
