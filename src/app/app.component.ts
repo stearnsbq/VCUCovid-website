@@ -47,6 +47,6 @@ export class AppComponent implements AfterViewInit, OnInit {
 
     this.elementRef.nativeElement.ownerDocument.body.style[
       'background-image'
-    ] = `url(${!isDevMode() ? 'vcucovid' : ''}/assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
+    ] = `url(./assets/bg${Math.floor(Math.random() * 8) + 1}.png)`;
   }
 }

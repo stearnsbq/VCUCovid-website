@@ -94,6 +94,16 @@ export class GraphComponent implements OnInit {
       options: {
         responsive: true,
         scales: {
+          xAxes:[{
+            ticks: {
+              callback: (value) => {
+                const date = new Date(value);
+                date.setDate(date.getDate() + 1)
+                date.setHours(0, 0, 0, 0);
+                return date.toLocaleString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+              }
+          }
+          }],
           yAxes: [
             {
               type: this.scale,
