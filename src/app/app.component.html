@@ -1,79 +1,85 @@
 <app-loading *ngIf="api.loading"></app-loading>
 
 <div class="covid_info_grid">
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Active Cases</h5>
-      <ul>
-        <li *ngIf="totals">Student Cases: <ng2-odometer [number]="totals.studentCases"></ng2-odometer>
-        </li>
-        <li *ngIf="totals">Employee Cases: <ng2-odometer [number]="totals.employeeCases"></ng2-odometer>
-        </li>
-      </ul>
+  <div class="top">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Active Cases</h5>
+        <ul>
+          <li *ngIf="totals">Student Cases: <ng2-odometer [number]="totals.studentCases"></ng2-odometer>
+          </li>
+          <li *ngIf="totals">Employee Cases: <ng2-odometer [number]="totals.employeeCases"></ng2-odometer>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Symptomatic Testing</h5>
+        <ul>
+          <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.symptomaticPositives"></ng2-odometer>
+          </li>
+          <li *ngIf="totals">Negative Tests: <ng2-odometer [number]="totals.symptomaticNegatives"></ng2-odometer>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Asymptomatic Surveillance Testing</h5>
+        <ul>
+          <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.asymptomaticPositives"></ng2-odometer>
+          </li>
+          <li *ngIf="totals">Negative Tests: <ng2-odometer [number]="totals.asymptomaticNegatives"></ng2-odometer>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Symptomatic Testing</h5>
-      <ul>
-        <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.symptomaticPositives"></ng2-odometer>
-        </li>
-        <li *ngIf="totals">Negative Tests: <ng2-odometer [number]="totals.symptomaticNegatives"></ng2-odometer>
-        </li>
-      </ul>
+  <div class="bottom">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Entry Testing</h5>
+        <ul>
+          <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.entryTestPositives"></ng2-odometer>
+          </li>
+          <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.entryTestNegatives"></ng2-odometer>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Asymptomatic Surveillance Testing</h5>
-      <ul>
-        <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.asymptomaticPositives"></ng2-odometer>
-        </li>
-        <li *ngIf="totals">Negative Tests: <ng2-odometer [number]="totals.asymptomaticNegatives"></ng2-odometer>
-        </li>
-      </ul>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Students in Isolation or Quarantine</h5>
+        <ul>
+          <li *ngIf="totals">Students in Isolation: <ng2-odometer [number]="totals.studentsInIsolation"></ng2-odometer>
+          </li>
+          <li *ngIf="totals">Students in Quarantine: <ng2-odometer [number]="totals.studentsInQuarantine"></ng2-odometer>
+          </li>
+        </ul>
+      </div>
     </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Entry Testing</h5>
-      <ul>
-        <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.entryTestPositives"></ng2-odometer>
-        </li>
-        <li *ngIf="totals">Positive Tests: <ng2-odometer [number]="totals.entryTestNegatives"></ng2-odometer>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">Students in Isolation or Quarantine</h5>
-      <ul>
-        <li *ngIf="totals">Students in Isolation: <ng2-odometer [number]="totals.studentsInIsolation"></ng2-odometer>
-        </li>
-        <li *ngIf="totals">Students in Quarantine: <ng2-odometer [number]="totals.studentsInQuarantine"></ng2-odometer>
-        </li>
-      </ul>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-body">
-      <h5 class="card-title">About</h5>
-      <ul>
-        <li>
-          <a class="card-link" style="cursor: pointer;" (click)="showModal = true" data-toggle="modal" data-target="#defintionModal">Definitions</a>
-        </li>
-        <li>
-          <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
-        </li>
-        <li>
-          <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
-        </li>
-      </ul>
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">About</h5>
+        <ul>
+          <li>
+            <a class="card-link" style="cursor: pointer;" (click)="showModal = true" data-toggle="modal" data-target="#defintionModal">Definitions</a>
+          </li>
+          <li>
+            <a class="card-link" href="https://together.vcu.edu/dashboard/">Data Source</a>
+          </li>
+          <li>
+            <a class="card-link" href="https://github.com/stearnsbq/VCUCovid-website">Github</a>
+          </li>
+        </ul>
 
-      <footer class="blockquote-footer">Last Updated {{lastUpdated}}</footer>
+        <footer class="blockquote-footer">Last Updated {{lastUpdated}}</footer>
+      </div>
     </div>
   </div>
+
+
 </div>
 <div class="charts">
   <div class="top">
