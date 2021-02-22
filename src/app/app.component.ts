@@ -35,6 +35,10 @@ export class AppComponent implements AfterViewInit, OnInit {
   ngOnInit() {
     this.api.get("totals").subscribe(({data}) => {
       this.totals = data;
+
+
+      this.meta.updateTag({name: "description", content: "A Dashboard that shows the current VCU COVID-19 Statistics.\n" + "Total Active Cases: " + (data.studentCases + data.employeeCases)})
+
     })
 
     this.api.get("lastUpdated").subscribe(({data}) => {
