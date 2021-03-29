@@ -47,7 +47,7 @@ export class GraphComponent implements OnInit {
 
   public async filter(timeScale){
     this.timeScale = timeScale
-    this.data = (await this.api.get(this.whatChart, this.timeScale).toPromise()).data
+    this.ngOnInit();
   }
 
   private getDigits(a) {
