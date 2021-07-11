@@ -4,7 +4,7 @@ A website that displays active student and employee cases of COVID-19, how many 
 
 
 
-Data source: https://together.vcu.edu/dashboard/
+Data source: https://together.vcu.edu/dashboard/ 
 API: https://github.com/stearnsbq/VCUCovid-API
  
 
